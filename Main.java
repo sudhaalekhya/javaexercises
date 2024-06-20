@@ -1,51 +1,64 @@
-package inheritance;
-class Animal {
-    String name;
-
-    public Animal(String name) {
-        this.name = name;
-    }
-
-    public void makeSound() {
-        System.out.println("Some generic sound");
-    }
+package day1;
+import java.util.ArrayList;
+interface Playable {
+	
+    void play();
+    void pause();
+    void stop();
 }
 
-// Subclass (Specialized class)
-class Dog extends Animal {
-    public Dog(String name) {
-        super(name);
+// MusicPlayer.java
+ class MusicPlayer implements Playable {
+    @Override
+    public void play() {
+        System.out.println("Music is playing.");
     }
 
     @Override
-    public void makeSound() {
-        System.out.println("Woof!");
-    }
-}
-
-// Subclass (Specialized class)
-class Cat extends Animal {
-    public Cat(String name) {
-        super(name);
+    public void pause() {
+        System.out.println("Music is paused.");
     }
 
     @Override
-    public void makeSound() {
-        System.out.println("Meow!");
+    public void stop() {
+        System.out.println("Music has stopped.");
     }
 }
 
+ class VideoPlayer implements Playable {
+	    @Override
+	    public void play() {
+	        System.out.println("Video is playing.");
+	    }
+
+	    @Override
+	    public void pause() {
+	        System.out.println("Video is paused.");
+	    }
+
+	    @Override
+	    public void stop() {
+	        System.out.println("Video has stopped.");
+	    }
+	}
 public class Main {
 
 	public static void main(String[] args) {
-		Dog dog = new Dog("Buddy");
-        Cat cat = new Cat("Whiskers");
+		ArrayList<Playable> playableList = new ArrayList<>();
 
-        System.out.println("Dog: " + dog.name);
-        dog.makeSound();
+        Playable musicPlayer = new MusicPlayer();
+        Playable videoPlayer = new VideoPlayer();
 
-        System.out.println("Cat: " + cat.name);
-        cat.makeSound();
+        playableList.add(musicPlayer);
+        playableList.add(videoPlayer);
+
+        for (Playable playable : playableList) {
+            playable.play();
+            playable.pause();
+            playable.stop();
+            System.out.println("---------");
+
 	}
 
+}
 }

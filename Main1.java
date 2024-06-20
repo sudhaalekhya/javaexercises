@@ -1,81 +1,130 @@
-package inheritance;
-//Engine class
-class Engine {
- public void start() {
-     System.out.println("Engine started");
- }
+package day1;
+interface Vehicle {
+    void start();
+    void stop();
 }
 
-//Wheel class
-class Wheel {
- private int size;
-
- public Wheel(int size) {
-     this.size = size;
- }
-
- public void rotate() {
-     System.out.println("Wheel rotating");
- }
+// LandVehicle.java
+interface LandVehicle extends Vehicle {
+    void drive();
 }
 
-//Body class
-class Body {
- private String color;
-
- public Body(String color) {
-     this.color = color;
- }
-
- public void displayColor() {
-     System.out.println("Body color: " + color);
- }
+// SeaVehicle.java
+ interface SeaVehicle extends Vehicle {
+    void floatOnWater();
 }
 
-//Car class using composition
-class Car {
- private Engine engine;
- private Wheel[] wheels;
- private Body body;
+// Car.java
+class Car implements LandVehicle {
+    @Override
+    public void start() {
+        System.out.println("Car is starting.");
+    }
 
- public Car() {
-     // Create engine object
-     engine = new Engine();
+    @Override
+    public void stop() {
+        System.out.println("Car is stopping.");
+    }
 
-     // Create four wheels
-     wheels = new Wheel[4];
-     for (int i = 0; i < 4; i++) {
-         wheels[i] = new Wheel(17); // Assuming wheel size is 17 inches
-     }
-
-     // Create body object
-     body = new Body("Red");
- }
-
- public void startCar() {
-     engine.start();
- }
-
- public void drive() {
-     for (Wheel wheel : wheels) {
-         wheel.rotate();
-     }
- }
-
- public void displayColor() {
-     body.displayColor();
- }
+    @Override
+    public void drive() {
+        System.out.println("Car is driving.");
+    }
 }
 
-//Main class to test composition
+// Bicycle.java
+ class Bicycle implements LandVehicle {
+    @Override
+    public void start() {
+        System.out.println("Bicycle is starting.");
+    }
+
+    @Override
+    public void stop() {
+        System.out.println("Bicycle is stopping.");
+    }
+
+    @Override
+    public void drive() {
+        System.out.println("Bicycle is being ridden.");
+    }
+}
+
+// Ship.java
+class Ship implements SeaVehicle {
+    @Override
+    public void start() {
+        System.out.println("Ship is starting.");
+    }
+
+    @Override
+    public void stop() {
+        System.out.println("Ship is stopping.");
+    }
+
+    @Override
+    public void floatOnWater() {
+        System.out.println("Ship is floating on water.");
+    }
+}
+
+// Submarine.java
+ class Submarine implements SeaVehicle {
+    @Override
+    public void start() {
+        System.out.println("Submarine is starting.");
+    }
+
+    @Override
+    public void stop() {
+        System.out.println("Submarine is stopping.");
+    }
+
+    @Override
+    public void floatOnWater() {
+        System.out.println("Submarine is floating on water.");
+    }
+}
 public class Main1 {
 
 	public static void main(String[] args) {
-		 Car myCar = new Car();
-	        myCar.startCar();
-	        myCar.drive();
-	        myCar.displayColor();
+		// Create instances of each vehicle
+        Car car = new Car();
+        Bicycle bicycle = new Bicycle();
+        Ship ship = new Ship();
+        Submarine submarine = new Submarine();
+
+        // Test Car methods
+        System.out.println("Testing Car:");
+        car.start();
+        car.drive();
+        car.stop();
+        System.out.println("---------");
+
+        // Test Bicycle methods
+        System.out.println("Testing Bicycle:");
+        bicycle.start();
+        bicycle.drive();
+        bicycle.stop();
+        System.out.println("---------");
+
+        // Test Ship methods
+        System.out.println("Testing Ship:");
+        ship.start();
+        ship.floatOnWater();
+        ship.stop();
+        System.out.println("---------");
+
+        // Test Submarine methods
+        System.out.println("Testing Submarine:");
+        submarine.start();
+        submarine.floatOnWater();
+        submarine.stop();
+        System.out.println("---------");
 
 	}
 
-}
+
+	}
+
+
